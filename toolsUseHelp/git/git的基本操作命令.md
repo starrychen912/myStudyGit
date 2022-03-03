@@ -107,3 +107,5 @@
    7. 如果修改比较简单 不会冲突 就使用pull命令 git pull
 8. 协同开发冲突
    1. 如果不是基于最新的github远程库的最新版所做的修改，不能推送，必须先拉取。接着按照分支冲突进行修改文件
+9. git的config文件  
+    C:\Windows\System32\drivers\etc

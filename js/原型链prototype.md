@@ -24,7 +24,7 @@
 2. 每个实例对象都有一个__proto__，称为隐式原型（属性）
 3. 对象的隐式原型的值为其对应构造函数的显示原型的值
 4. 内存结构（图）
-   ![原型的内存图](https://github.com/starrychen912/myStudyGit/blob/master/js%E9%AB%98%E7%BA%A7/jsStudyScreen/prototypeMemory.png?raw=true)
+   ![原型的内存图](https://github.com/starrychen912/myStudyGit/blob/master/js/jsStudyScreen/prototypeMemory.png?raw=true)
 5. 总结：
    1. 函数的 prototype 属性：在定义函数时自动添加的，默认值是一个空 object 对象
    2. 对象的__proto__属性：创建对象时自动添加的，默认值为构造函数的 prototype 属性值

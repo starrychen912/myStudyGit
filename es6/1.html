@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      
+   </style>
+</head>
+<body>
+   
+  
+    <script>
+        // 需求2 从数组中返回偶数的元素
+        const arr = [1,6,9,10]
+        // const result = arr.filter(function(item){
+        //     if(item %2 == 0){
+        //         return true
+        //     }else{
+        //         return false
+        //     }
+        // })
+        console.log(result);//[6,10]
+        // es6
+        const result1 = arr.filter(item=>{
+            if(item %2 == 0){
+                return true
+            }else{
+                return false
+            }
+        })
+        // 简化
+        const result2 =arr.filter(item =>item %2 == 0)
+    </script>
+</body>
+</html>

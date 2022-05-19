@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+
+</head>
+
+<body>
+    <button >点击1</button>
+    <button >点击2</button>
+    <button id="btn3">点击3</button>
+    <button >点击4</button>
+    <input type="text" name="msg1"><br>
+    <input type="text" name="msg2"><br>
+   <script>
+    //    需求：
+    // 1， 统计一共有多少个按钮
+    // 2. 取出第2个button的文本
+    // 3. 输出所有button标签的文本
+    // 4. 输出‘测试三’按钮是所有按钮中的第几个
+   var $buttons = $('button')
+//    size1.8后不适用 size()/length: 包含的DOM元素个数
+   console.log($buttons.length);
+//    需求2 取出第2个button的文本 [index]/get(index): 得到对应位置的DOM元素
+    console.log($buttons[1].innerHTML,$buttons.get(1).innerHTML)
+    // 输出所有button标签的文本
+    $buttons.each(function(index,domele){
+        console.log(index,domele);
+        // 取到了index 和 dom元素
+    })
+   </script>
+</body>
+
+</html>

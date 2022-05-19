@@ -5,15 +5,50 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>监视属性</title>
     <!-- 引入之后全局就多了一个vue的构造函数 -->
     <script src="vue.js"></script>
 </head>
 
 <body>
     
-   
+   <div class="root">
+    <h2>今天天气很{{info}}</h2>
+    <button @click="change">切换天气</button>
+
+   </div>
   
 </body>
+<script>
+   const vm = new Vue({
+        el:".root",
+        data:{
+            firstName:'ka',
+            lastName:'ry',
+            fullName:'kary'
 
+        },
+        // 计算属性 简单
+        computed:{
+            fullName(){
+                return this.lastName+this.firstName
+            }
+        },
+        // 监视属性 延迟就只能用监视，watch可以很简单的开启一个异步任务 
+        watch:{
+            firstName(val){
+               this.fullName = val+this.lastName
+            },
+            lastName(val){
+                // setTimeout属于window对象的函数，用function的话，this指向window，剪头函数会取消作用域，指向fullName函数作用域的this，即vm实例
+                setTimeout(()=>{
+                     this.lastName = val+this.firstName
+                },1000)
+               
+            }
+        },
+        
+    })
+   
+</script>
 </html>

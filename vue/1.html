@@ -16,37 +16,46 @@
 </head>
 <body>
     <div id="root">
-        <h2 style="opacity: 1;">hhhh</h2>
-        <button @click="opacity = 1">透明度设置为1</button>
-        <button @click="stop">点我停止变换</button>
+        <school></school>
     </div>
 </body>
 <script>
+    Vue.config.productionTip = false
+    // 全局注册组件 叫什么 在哪 不用去注册就可以用
+    Vue.components('school',school)
+    // 创建school组件
+    const school = Vue.extend({
+        // el:'#root' 组件定义不能写el配置，因为最终组件都被一个vm管理
+        // data也要写成函数式
+        template:`
+        <div>
+            <h2>nihao</h2>
+            <h2>{{name}}</h2>
+        </div>`,
+        data(){
+            return{
+            name:'bnuhiu'
+            }
+        },
+        methods: {
+            say(){
+
+            }
+        },
+    })
+    // 创建vm
      const vm = new Vue({
         el:'#root',
+        // 写了组件就得注册 这是局部注册
+        components:{
+            school
+        },
         data:{
             opacity:1
         },
         methods: {
-            stop(){
-                this.$destroy()
-            },
-            async bewsda(){
-                await ajax();
-            }
-           
         },
-        mounted() {
-            this.timer = setInterval(()=>{
-                this.opacity -= 0.01
-                if(this.opacity <= 0) this.opacity = 1
-            },16)
-            this.newPromise();
-        },
-        beforeDestroy() {
-            console.log('vm要被销毁了');
-            clearInterval(this.timer)
-        },
+       
     })
 </script>
 </html>

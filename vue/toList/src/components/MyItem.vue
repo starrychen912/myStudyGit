@@ -1,0 +1,111 @@
+<template>
+  <li>
+    <label>
+      <!-- 为什么不使用v-model要这么麻烦 是因为todothing是props传来的值不能被修改的 虽然vue没有监测到对象里面的属性 -->
+      <input
+        type="checkbox"
+        :checked="todothing.done"
+        @change="handleCheck(todothing.id)"
+      />
+      <span v-show="!todothing.isEdit">{{ todothing.name }}</span>
+      <input
+        type="text"
+        :value="todothing.name"
+        v-show="todothing.isEdit"
+        @blur="handleBlur(todothing,$event)"
+        ref='inputName'
+      />
+    </label>
+    <button class="btn btn-danger" @click="deleteTo(todothing.id)">删除</button>
+    <button class="btn btn-edit" @click="editTo(todothing)" v-show="!todothing.isEdit">编辑</button>
+  </li>
+</template>
+
+<script>
+export default {
+  name: "MyItem",
+  props: ["todothing", "checkTodo", "deleteTodo"],
+  methods: {
+    handleCheck(id) {
+      this.checkTodo(id);
+    },
+    deleteTo(id) {
+      if (confirm("确定删除吗")) {
+        this.deleteTodo(id);
+      }
+    },
+    // 编辑
+    editTo(todo) {
+      // todo.isEdit = false 这样拿不到 数据传不去
+      // 数据监测原理
+      // 这个逻辑是编辑一次 就添加一个属性 但是没有必要 编辑了有属性了就更改属性就好了
+      // this.$set(todo,'isEdit',true)
+      // 对象身上的方法有没有这个属性的判断
+      if (todo.hasOwnProperty('isEdit')) {
+        todo.isEdit = true;
+      } else {
+        this.$set(todo, "isEdit", true);
+      }
+      // 因为模版解析是把整个函数走完 再展示
+      // setTimeout(()=>{
+      //    // 获取焦点
+      // this.$refs.inputName.focus()
+      // },200)
+    // 官方设置的api 回在dom更新完成之后再执行
+    this.$nextTick(function(){
+       // 获取焦点
+      this.$refs.inputName.focus()
+    })
+    },
+    // 拿到input的数据 因为是props传来的 所以不能直接更改 把数据传回去改 通过event拿到输入的数据 获取焦点的方法
+    handleBlur(todothing,e) {
+      todothing.isEdit = false;
+      if(!e.target.value.trim()) return alert('不能为空')
+      this.$bus.$emit('updateTodo',todothing.id,e.target.value)
+      console.log(e.target.value)
+    },
+  },
+};
+</script>
+
+<style scoped>
+li {
+  list-style: none;
+  height: 36px;
+  line-height: 36px;
+  padding: 0 5px;
+  border-bottom: 1px solid #ddd;
+}
+
+li label {
+  float: left;
+  cursor: pointer;
+}
+
+li label li input {
+  vertical-align: middle;
+  margin-right: 6px;
+  position: relative;
+  top: -1px;
+}
+
+li button {
+  float: right;
+  display: none;
+  margin-top: 3px;
+}
+
+li:before {
+  content: initial;
+}
+
+li:last-child {
+  border-bottom: none;
+}
+li:hover {
+  background-color: pink;
+}
+li:hover button {
+  display: block;
+}
+</style>

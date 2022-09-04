@@ -1,0 +1,38 @@
+<template>
+	<view class="">
+		<navigator url="/pages/detail/detail?id=80&age=19">跳转详情页</navigator>
+		<navigator url="/pages/message/message" open-type="switchTab">信息页</navigator>
+		<!-- 重定向没有返回箭头 会把上一个页面关闭再跳转 -->
+		<navigator url="/pages/detail/detail" open-type="redirect">跳转详情页 关闭其他页面</navigator>
+		<button @click="skip">跳转详情页面</button>
+		<button @click="skip1">跳转bar页面</button>
+		<button @click="redirect">关闭其他页面 跳转</button>
+	</view>
+
+</template>
+
+<script>
+	export default{
+		methods:{
+			skip(){
+				uni.navigateTo({
+					url:'/pages/detail/detail'
+				})
+			},
+			skip1(){
+				uni.switchTab({
+					// 跳转bar 关闭其他非bar页面
+					url:'/pages/message/message'
+				})
+			},
+			redirect(){
+				uni.redirectTo({
+					url:'/pages/detail/detail'
+				})
+			}
+		}
+	}
+</script>
+
+<style>
+</style>
